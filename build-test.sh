@@ -17,7 +17,7 @@ kind version
 kubectl version --client=true
 helm version
 
-kind create cluster --wait 10m --config kind-config.yaml
+kind create cluster --config kind-config.yaml   #--wait 10m
 
 kubectl get nodes
 
