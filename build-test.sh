@@ -27,11 +27,12 @@ kind load docker-image $docker_username/nginx:dev
 kubectl apply -f nginx-deployment.yaml
 kubectl apply -f nginx-service.yaml
 
-NODE_IP=$(kubectl get node -o wide|tail -1|awk {'print $6'})
-NODE_PORT=$(kubectl get svc nginx-service -o go-template='{{range.spec.ports}}{{if .nodePort}}{{.nodePort}}{{"\n"}}{{end}}{{end}}')
-sleep 60
-SUCCESS=$(curl $NODE_IP:$NODE_PORT)
-if [[ "${SUCCESS}" != "Hello World, this is Imad" ]]; 
+# NODE_IP=$(kubectl get node -o wide |tail -1| awk {'print $6'})
+# NODE_PORT=$(kubectl get svc nginx-service -o go-template='{{range.spec.ports}}{{if .nodePort}}{{.nodePort}}{{"\n"}}{{end}}{{end}}')
+# sleep 60
+# SUCCESS=$(curl $NODE_IP:$NODE_PORT)
+SUCCESS=$(curl 127.0.0.1:80)
+if [[ "${SUCCESS}" != "Hello World" ]]; 
 then
  kind -q delete cluster
  exit 1;
